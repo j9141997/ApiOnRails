@@ -1,15 +1,15 @@
 module Api
   module V1
     class PostsController < ApplicationController
-      before_action :set_post, only: [:show, :create, :update]
+      before_action :set_post, only: [:show, :update, :destroy]
 
       def index
-        posts = Post.all
-        render json: { status: 'SUCCESS', message: 'Loaded Post', data: posts }
+        posts = Post.order(created_at: :desc)
+        render json: { status: 'SUCCESS', message: 'Loaded posts', data: posts }
       end
 
       def show
-        render json: { status: 'SUCCESS', message: 'Loaded the Post', data: @post }
+        render json: { status: 'SUCCESS', message: 'Loaded the post', data: @post }
       end
 
       def create
